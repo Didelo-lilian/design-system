@@ -9,6 +9,7 @@ import "../src/tokens/generated/core.css";
 import "../src/tokens/generated/light.css";
 import "../src/tokens/generated/dark.css";
 import { theme } from "../src/theme/index.ts";
+import { refineControls } from "./controls.ts";
 
 const SyncMode = ({ mode }: { mode: "light" | "dark" }) => {
   const { setMode } = useColorScheme();
@@ -26,6 +27,16 @@ const withTheme: Decorator = (Story, { globals }) => (
 
 const preview: Preview = {
   decorators: [withTheme],
+  argTypesEnhancers: [refineControls],
+  parameters: {
+    controls: {
+      expanded: true,
+      disableSaveFromUI: true,
+      // Props with no sensible text/number/boolean/option control: refs, styling hooks, slots, handlers, icons and nodes.
+      exclude:
+        /^(ref|key|className|style|sx|classes|slots|slotProps|component|actions?|icon|avatar|on[A-Z].*|\w+Icon)$/,
+    },
+  },
   initialGlobals: { theme: "light" },
   globalTypes: {
     theme: {
