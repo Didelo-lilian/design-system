@@ -9,4 +9,3 @@ coverage/
 .DS_Store
 src/tokens/generated/
 .vitest/
-.vitest-attachments/
