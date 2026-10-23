@@ -6,7 +6,7 @@
 
 A design system on MUI and React: design tokens, accessible components and automated tests, documented in Storybook and reused by my other projects.
 
-> **Status:** bootstrapping. The Storybook will be live at https://ds.didelo.fr once the first release ships. Follow the [roadmap](https://github.com/orgs/Didelo-lilian/projects/1).
+> **Status:** bootstrapping. The Storybook is live at https://ds.didelo.fr and follows `main`; the npm package comes with the first release. Follow the [roadmap](https://github.com/orgs/Didelo-lilian/projects/1).
 
 ## What it will be
 
@@ -14,7 +14,7 @@ A design system on MUI and React: design tokens, accessible components and autom
 |---|---|
 | Components | React 19 and MUI 9, a dozen components that wrap MUI instead of reimplementing it |
 | Tokens | One JSON source in the DTCG format, built into CSS variables and the MUI theme, light and dark |
-| Documentation | Storybook, served as a static site by Traefik on the [VPS](https://github.com/Didelo-lilian/infra) |
+| Documentation | Storybook, built into an nginx image on every merge to `main` and served behind Traefik on the [VPS](https://github.com/Didelo-lilian/infra) |
 | Tests | Stories run as tests in a real browser, axe accessibility checks, screenshot regression |
 | Release | release-please for versions and changelog, then npm |
 
