@@ -119,6 +119,7 @@ export const Long: Story = {
     const content = ui.getByText(/^Paragraph 1\./).parentElement as HTMLElement;
     await expect(content.scrollHeight).toBeGreaterThan(content.clientHeight);
     await expect(getComputedStyle(content).overflowY).toBe("auto");
+    await waitFor(() => expect(content).toHaveAttribute("tabindex", "0"));
 
     content.scrollTop = content.scrollHeight;
     await expect(content.scrollTop).toBeGreaterThan(0);
