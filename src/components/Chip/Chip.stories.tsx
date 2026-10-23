@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, fn } from "storybook/test";
 import { Chip } from "./Chip.tsx";
 
-const TagIcon = () => (
+const tagIcon = (
   <SvgIcon>
     <path d="M21.41 11.58l-9-9A2 2 0 0 0 11 2H4a2 2 0 0 0-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58s1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41s-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z" />
   </SvgIcon>
@@ -55,7 +55,7 @@ export const OutlinedSuccess: Story = {
   args: { variant: "outlined", color: "success" },
 };
 
-export const WithIcon: Story = { args: { icon: <TagIcon /> } };
+export const WithIcon: Story = { args: { icon: tagIcon } };
 
 export const WithAvatar: Story = {
   args: { avatar: <Avatar>L</Avatar>, label: "Lilian" },
