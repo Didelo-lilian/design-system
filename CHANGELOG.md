@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/Didelo-lilian/design-system/compare/v0.2.0...v0.2.1) (2026-10-23)
+
+
+### Bug fixes
+
+* **ci:** publish to npm with trusted publishing instead of a token ([#53](https://github.com/Didelo-lilian/design-system/issues/53)) ([1d3da5b](https://github.com/Didelo-lilian/design-system/commit/1d3da5b076f37b836468ab1e46930711be3e7835)), closes [#52](https://github.com/Didelo-lilian/design-system/issues/52)
+
 ## [0.2.0](https://github.com/Didelo-lilian/design-system/compare/v0.1.0...v0.2.0) (2026-10-23)
 
 
