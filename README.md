@@ -5,3 +5,4 @@ Images referenced by pull request descriptions, one folder per pull request. Thi
 - `pr-9`: design tokens page
 - `pr-11`: MUI theme, light and dark
 - `pr-13`: Button, TextField, Checkbox, Card and Alert, light and dark
+- `pr-23`: Chip component, light and dark
