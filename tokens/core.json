@@ -1,0 +1,71 @@
+{
+  "color": {
+    "$type": "color",
+    "white": { "$value": "#ffffff" },
+    "black": { "$value": "#000000" },
+    "neutral": {
+      "50": { "$value": "#f8fafc" },
+      "100": { "$value": "#f1f5f9" },
+      "200": { "$value": "#e2e8f0" },
+      "300": { "$value": "#cbd5e1" },
+      "400": { "$value": "#94a3b8" },
+      "500": { "$value": "#64748b" },
+      "600": { "$value": "#475569" },
+      "700": { "$value": "#334155" },
+      "800": { "$value": "#1e293b" },
+      "900": { "$value": "#0f172a" }
+    },
+    "blue": {
+      "300": { "$value": "#7cb3ff" },
+      "500": { "$value": "#2563eb" },
+      "700": { "$value": "#1d4ed8" }
+    },
+    "green": {
+      "300": { "$value": "#6ee7a8" },
+      "700": { "$value": "#15803d" }
+    },
+    "amber": {
+      "300": { "$value": "#fcd34d" },
+      "700": { "$value": "#b45309" }
+    },
+    "red": {
+      "300": { "$value": "#fca5a5" },
+      "700": { "$value": "#b91c1c" }
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "1": { "$value": "4px" },
+    "2": { "$value": "8px" },
+    "3": { "$value": "12px" },
+    "4": { "$value": "16px" },
+    "6": { "$value": "24px" },
+    "8": { "$value": "32px" }
+  },
+  "radius": {
+    "$type": "dimension",
+    "sm": { "$value": "4px" },
+    "md": { "$value": "8px" },
+    "lg": { "$value": "16px" }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "sans": { "$value": ["Inter", "system-ui", "sans-serif"] },
+      "mono": { "$value": ["ui-monospace", "SFMono-Regular", "monospace"] }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "regular": { "$value": 400 },
+      "medium": { "$value": 500 },
+      "bold": { "$value": 700 }
+    },
+    "size": {
+      "$type": "dimension",
+      "sm": { "$value": "0.875rem" },
+      "md": { "$value": "1rem" },
+      "lg": { "$value": "1.25rem" },
+      "xl": { "$value": "1.5rem" }
+    }
+  }
+}
