@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
-import { light } from "../../tokens/index.ts";
+import { dark, light } from "../../tokens/index.ts";
 import { Icon, iconNames } from "./Icon.tsx";
 
 const meta = {
@@ -74,9 +74,9 @@ export const ColorWarning: Story = { args: { color: "warning" } };
 
 export const ColorError: Story = {
   args: { color: "error" },
-  play: async ({ canvasElement }) => {
+  play: async ({ canvasElement, globals }) => {
     await expect(canvasElement.querySelector("svg")).toHaveStyle({
-      color: light.theme.error.main,
+      color: (globals.theme === "dark" ? dark : light).theme.error.main,
     });
   },
 };

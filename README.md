@@ -25,7 +25,7 @@ Requirements: Node 24 (`.nvmrc`), and gitleaks for `make check`.
 ```bash
 npm ci && npm run storybook   # Storybook on http://localhost:6006
 make check                    # same checks as CI: lint, type check, tests in chromium, Storybook build, gitleaks
-npm test                      # unit tests, then every story (and its play function) in a real browser
+npm test                      # unit tests, then every story in a real browser, in light and dark: its play function and an axe check
 docker build -t design-system .   # Storybook as an nginx image
 docker run --rm -p 8080:8080 design-system   # served on http://localhost:8080
 ```
