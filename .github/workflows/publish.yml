@@ -24,6 +24,5 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run check:package
+      # No token: npm trusts this workflow (a trusted publisher set on the package) and signs the provenance.
       - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
