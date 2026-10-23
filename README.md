@@ -26,6 +26,7 @@ Requirements: Node 24 (`.nvmrc`), and gitleaks for `make check`.
 npm ci && npm run storybook   # Storybook on http://localhost:6006
 make check                    # same checks as CI: lint, type check, tests in chromium, Storybook build, gitleaks
 npm test                      # unit tests, then every story in a real browser, in light and dark: its play function and an axe check
+VISUAL=1 npm test             # also compare the screenshots (the baselines are Linux renderings, see below)
 docker build -t design-system .   # Storybook as an nginx image
 docker run --rm -p 8080:8080 design-system   # served on http://localhost:8080
 ```
@@ -35,6 +36,18 @@ docker run --rm -p 8080:8080 design-system   # served on http://localhost:8080
 Versions follow [SemVer](https://semver.org) and are cut by [release-please](https://github.com/googleapis/release-please) from the Conventional Commit titles of merged pull requests. Never edited by hand:
 - [`CHANGELOG.md`](CHANGELOG.md): every release, grouped by type;
 - [Releases](https://github.com/Didelo-lilian/design-system/releases): notes and tags.
+
+## Visual regression
+
+In CI every story is also screenshotted, in light and dark, and compared with the baseline committed next to the stories (`src/**/__screenshots__/<file>/<theme>/<story>.png`). A difference fails the CI, which uploads the `screenshots` artifact with the diff images (`.vitest-attachments`).
+
+The baselines are rendered on Linux, as in CI: fonts and anti-aliasing differ on macOS, so locally the check is skipped unless `VISUAL=1`.
+
+To update the baselines after a wanted visual change:
+
+1. Run the **Update screenshots** workflow on your branch (Actions tab, or `gh workflow run update-screenshots.yml --ref <branch>`).
+2. Download its `screenshots` artifact, copy the `__screenshots__` folders over `src/`, and commit them with the change.
+3. Look at the changed images in the PR diff before merging.
 
 ## How I built this
 

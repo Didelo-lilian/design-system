@@ -1,0 +1,24 @@
+name: Update screenshots
+
+on: workflow_dispatch
+
+permissions:
+  contents: read
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run tokens
+      - run: npx vitest run --update
+      - uses: actions/upload-artifact@v7
+        with:
+          name: screenshots
+          path: src/**/__screenshots__

@@ -20,6 +20,15 @@ jobs:
       - run: npm ci
       - run: npx playwright install chromium
       - run: npm run check
+      # A screenshot that differs or is new: the diff images and the screenshots the run wrote, to review or commit.
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: screenshots
+          path: |
+            src/**/__screenshots__
+            .vitest-attachments
+          if-no-files-found: ignore
 
   image:
     runs-on: ubuntu-latest
