@@ -1,0 +1,21 @@
+{
+  "theme": {
+    "$type": "color",
+    "bg": {
+      "default": { "$value": "{color.neutral.50}" },
+      "paper": { "$value": "{color.white}" }
+    },
+    "text": {
+      "primary": { "$value": "{color.neutral.900}" },
+      "secondary": { "$value": "{color.neutral.600}" }
+    },
+    "divider": { "$value": "{color.neutral.200}" },
+    "primary": {
+      "main": { "$value": "{color.blue.700}" },
+      "contrast": { "$value": "{color.white}" }
+    },
+    "success": { "main": { "$value": "{color.green.700}" } },
+    "warning": { "main": { "$value": "{color.amber.700}" } },
+    "error": { "main": { "$value": "{color.red.700}" } }
+  }
+}

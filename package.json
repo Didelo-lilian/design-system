@@ -13,11 +13,13 @@
     "node": ">=24"
   },
   "scripts": {
-    "storybook": "storybook dev -p 6006",
+    "tokens": "node scripts/build-tokens.mjs",
+    "storybook": "npm run tokens && storybook dev -p 6006",
     "build-storybook": "storybook build",
     "typecheck": "tsc",
     "lint": "biome check",
-    "check": "npm run lint && npm run typecheck && npm run build-storybook"
+    "test": "node --test \"src/**/*.test.ts\"",
+    "check": "npm run tokens && npm run lint && npm run typecheck && npm test && npm run build-storybook"
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.2",
@@ -33,6 +35,7 @@
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "storybook": "10.6.3",
+    "style-dictionary": "5.7.0",
     "typescript": "6.0.3",
     "vite": "8.3.5"
   }
