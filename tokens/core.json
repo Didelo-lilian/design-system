@@ -51,21 +51,45 @@
   "font": {
     "family": {
       "$type": "fontFamily",
-      "sans": { "$value": ["Inter", "system-ui", "sans-serif"] },
-      "mono": { "$value": ["ui-monospace", "SFMono-Regular", "monospace"] }
+      "display": {
+        "$value": ["Bricolage Grotesque Variable", "system-ui", "sans-serif"]
+      },
+      "sans": { "$value": ["Figtree Variable", "system-ui", "sans-serif"] },
+      "mono": {
+        "$value": [
+          "JetBrains Mono Variable",
+          "ui-monospace",
+          "SFMono-Regular",
+          "monospace"
+        ]
+      }
     },
     "weight": {
       "$type": "fontWeight",
       "regular": { "$value": 400 },
       "medium": { "$value": 500 },
+      "semibold": { "$value": 600 },
       "bold": { "$value": 700 }
     },
     "size": {
       "$type": "dimension",
+      "xs": { "$value": "0.75rem" },
       "sm": { "$value": "0.875rem" },
       "md": { "$value": "1rem" },
       "lg": { "$value": "1.25rem" },
-      "xl": { "$value": "1.5rem" }
+      "xl": { "$value": "1.5rem" },
+      "2xl": { "$value": "2rem" },
+      "3xl": { "$value": "2.5rem" },
+      "4xl": { "$value": "3rem" }
+    },
+    "lineHeight": {
+      "$type": "number",
+      "tight": { "$value": 1.15 },
+      "normal": { "$value": 1.5 }
+    },
+    "letterSpacing": {
+      "$type": "dimension",
+      "tight": { "$value": "-0.02em" }
     }
   }
 }
