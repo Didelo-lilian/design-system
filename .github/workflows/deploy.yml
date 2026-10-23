@@ -35,7 +35,8 @@ jobs:
           private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
           owner: Didelo-lilian
           repositories: infra
-      # The Server workflow pulls the new :main image; the `production` environment approval still gates it.
-      - run: gh workflow run server.yml -R Didelo-lilian/infra -f force=true
+      # Deploy app only restarts the stack on the new :main image, so it needs no approval; Server, which
+      # changes the server configuration, keeps its own.
+      - run: gh workflow run deploy-app.yml -R Didelo-lilian/infra -f stack=ds
         env:
           GH_TOKEN: ${{ steps.app.outputs.token }}
