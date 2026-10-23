@@ -78,13 +78,13 @@ export const WithoutArrow: Story = { args: { arrow: false } };
 export const Placements: Story = {
   args: { open: true },
   parameters: { controls: { disable: true } },
-  render: ({ title, ...args }) => (
-    <div style={{ display: "flex", gap: "8rem", padding: "2rem" }}>
+  render: (args) => (
+    <div style={{ display: "flex", gap: "10rem", padding: "2rem" }}>
       {(["top", "right", "bottom", "left"] as const).map((placement) => (
         <Tooltip
           key={placement}
           {...args}
-          title={`${title} (${placement})`}
+          title={placement}
           placement={placement}
         >
           <button type="button">{placement}</button>
