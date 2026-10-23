@@ -39,14 +39,14 @@ Versions follow [SemVer](https://semver.org) and are cut by [release-please](htt
 
 ## Visual regression
 
-In CI every story is also screenshotted, in light and dark, and compared with the baseline committed next to the stories (`src/**/__screenshots__/<file>/<theme>/<story>.png`). A difference fails the CI, which uploads the `screenshots` artifact with the diff images (`.vitest-attachments`).
+In CI every story is also screenshotted, in light and dark, and compared with the baseline committed next to the stories (`src/**/__screenshots__/<file>/<theme>/<story>.png`). A difference fails the CI, which uploads the `screenshot-diffs` artifact with the diff images.
 
 The baselines are rendered on Linux, as in CI: fonts and anti-aliasing differ on macOS, so locally the check is skipped unless `VISUAL=1`.
 
 To update the baselines after a wanted visual change:
 
-1. Run the **Update screenshots** workflow on your branch (Actions tab, or `gh workflow run update-screenshots.yml --ref <branch>`).
-2. Download its `screenshots` artifact, copy the `__screenshots__` folders over `src/`, and commit them with the change.
+1. Add the `update-screenshots` label to your pull request: the **Update screenshots** workflow regenerates every baseline on Linux (`gh pr edit <number> --add-label update-screenshots`; remove and re-add the label to run it again).
+2. Download the `screenshots` artifact of that run (`gh run download <run-id> -n screenshots`), copy the `__screenshots__` folders over `src/`, and commit them with the change.
 3. Look at the changed images in the PR diff before merging.
 
 ## How I built this
