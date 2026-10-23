@@ -20,6 +20,12 @@ jobs:
       - run: npm ci
       - run: npm run check
 
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: docker build .
+
   secrets:
     runs-on: ubuntu-latest
     steps:

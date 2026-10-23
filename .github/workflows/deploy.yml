@@ -1,0 +1,41 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  packages: write
+
+# Never cancel: a half-pushed image or a lost deploy trigger is worse than waiting.
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+env:
+  IMAGE: ghcr.io/didelo-lilian/design-system
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: echo "$GITHUB_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          docker build -t "$IMAGE:main" -t "$IMAGE:sha-${GITHUB_SHA::7}" .
+          docker push --all-tags "$IMAGE"
+      # A GitHub App token, not GITHUB_TOKEN: GITHUB_TOKEN cannot start a workflow in another repository.
+      - uses: actions/create-github-app-token@v3
+        id: app
+        with:
+          app-id: ${{ vars.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          owner: Didelo-lilian
+          repositories: infra
+      # The Server workflow pulls the new :main image; the `production` environment approval still gates it.
+      - run: gh workflow run server.yml -R Didelo-lilian/infra -f force=true
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
