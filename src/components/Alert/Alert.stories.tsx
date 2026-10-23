@@ -25,6 +25,15 @@ export const WarningSeverity: Story = {
 
 export const ErrorSeverity: Story = {
   args: { severity: "error", children: "The payment could not be processed." },
+  play: async ({ canvasElement, canvas }) => {
+    await expect(canvas.getByRole("alert")).toHaveTextContent(
+      "The payment could not be processed.",
+    );
+    await expect(canvasElement.querySelector("svg")).toHaveAttribute(
+      "aria-hidden",
+      "true",
+    );
+  },
 };
 
 export const WithTitle: Story = {

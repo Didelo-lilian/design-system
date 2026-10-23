@@ -14,7 +14,16 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const Checked: Story = { args: { defaultChecked: true } };
+export const Checked: Story = {
+  args: { defaultChecked: true },
+  play: async ({ canvas, userEvent, args }) => {
+    const toggle = canvas.getByRole("switch", { name: "Enable notifications" });
+    await expect(toggle).toBeChecked();
+    await userEvent.click(toggle);
+    await expect(toggle).not.toBeChecked();
+    await expect(args.onChange).toHaveBeenCalledTimes(1);
+  },
+};
 
 export const Disabled: Story = { args: { disabled: true } };
 

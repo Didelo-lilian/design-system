@@ -37,7 +37,18 @@ export const Outlined: Story = {
   },
 };
 
-export const Elevation: Story = { args: { variant: "elevation" } };
+export const Elevation: Story = {
+  args: { variant: "elevation" },
+  play: async ({ canvas }) => {
+    const card = canvas.getByLabelText("Card title");
+    await expect(card).toContainElement(
+      canvas.getByRole("heading", { name: "Card title" }),
+    );
+    await expect(card).toHaveTextContent(
+      "Supporting text that describes the card content.",
+    );
+  },
+};
 
 export const TextOnly: Story = {
   args: {

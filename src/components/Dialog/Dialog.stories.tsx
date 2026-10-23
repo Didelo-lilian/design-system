@@ -113,6 +113,19 @@ export const Long: Story = {
       </p>
     )),
   },
+  play: async ({ canvas }) => {
+    const dialog = await openDialog(canvas);
+    const ui = within(dialog);
+    const content = ui.getByText(/^Paragraph 1\./).parentElement as HTMLElement;
+    await expect(content.scrollHeight).toBeGreaterThan(content.clientHeight);
+    await expect(getComputedStyle(content).overflowY).toBe("auto");
+
+    content.scrollTop = content.scrollHeight;
+    await expect(content.scrollTop).toBeGreaterThan(0);
+    await waitFor(() =>
+      expect(ui.getByRole("button", { name: "Accept" })).toBeVisible(),
+    );
+  },
 };
 
 export const FullWidth: Story = {

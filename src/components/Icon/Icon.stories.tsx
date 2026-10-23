@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
+import { light } from "../../tokens/index.ts";
 import { Icon, iconNames } from "./Icon.tsx";
 
 const meta = {
@@ -47,7 +48,15 @@ export const Small: Story = { args: { size: "small" } };
 
 export const Medium: Story = { args: { size: "medium" } };
 
-export const Large: Story = { args: { size: "large" } };
+export const Large: Story = {
+  args: { size: "large" },
+  play: async ({ canvasElement }) => {
+    await expect(canvasElement.querySelector("svg")).toHaveStyle({
+      width: "35px",
+      height: "35px",
+    });
+  },
+};
 
 export const ColorInherit: Story = { args: { color: "inherit" } };
 
@@ -63,7 +72,14 @@ export const ColorSuccess: Story = { args: { color: "success" } };
 
 export const ColorWarning: Story = { args: { color: "warning" } };
 
-export const ColorError: Story = { args: { color: "error" } };
+export const ColorError: Story = {
+  args: { color: "error" },
+  play: async ({ canvasElement }) => {
+    await expect(canvasElement.querySelector("svg")).toHaveStyle({
+      color: light.theme.error.main,
+    });
+  },
+};
 
 export const ColorInfo: Story = { args: { color: "info" } };
 
@@ -72,6 +88,7 @@ export const Labelled: Story = {
   play: async ({ canvas }) => {
     const icon = canvas.getByRole("img", { name: "Delete the file" });
     await expect(icon).not.toHaveAttribute("aria-hidden", "true");
+    await expect(icon).toHaveAccessibleName("Delete the file");
   },
 };
 
