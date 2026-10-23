@@ -7,3 +7,4 @@ Images referenced by pull request descriptions, one folder per pull request. Thi
 - `pr-13`: Button, TextField, Checkbox, Card and Alert, light and dark
 - `pr-23`: Chip component, light and dark
 - `pr-24`: Dialog component, light and dark
+- `pr-22`: Tabs component, light and dark
