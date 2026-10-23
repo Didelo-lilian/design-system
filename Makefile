@@ -3,5 +3,6 @@
 
 check:
 	npm ci
+	npx playwright install chromium
 	npm run check
 	gitleaks git --redact --no-banner
