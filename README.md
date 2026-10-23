@@ -18,6 +18,34 @@ A design system on MUI and React: design tokens, accessible components and autom
 | Tests | Stories run as tests in a real browser, axe accessibility checks, screenshot regression |
 | Release | release-please for versions and changelog, then npm |
 
+## Install
+
+```bash
+npm install @didelo/design-system @mui/material @mui/icons-material @emotion/react @emotion/styled react react-dom
+```
+
+React 19 and MUI 9 are peer dependencies. The package is ESM only and ships its type declarations.
+
+```tsx
+import { Button, theme } from "@didelo/design-system";
+import "@didelo/design-system/fonts.css"; // Bricolage Grotesque, Figtree and JetBrains Mono, self-hosted
+import "@didelo/design-system/tokens.css"; // the design tokens as CSS custom properties (optional)
+import { CssBaseline, ThemeProvider } from "@mui/material";
+
+export const App = () => (
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <Button variant="contained">Save</Button>
+  </ThemeProvider>
+);
+```
+
+The theme has a light and a dark color scheme, switched with the `data-theme` attribute (`<html data-theme="dark">`) or MUI's `useColorScheme`.
+
+## Releases
+
+[release-please](https://github.com/googleapis/release-please) reads the Conventional Commits on `main` and keeps a release pull request up to date (version and `CHANGELOG.md`). Merging it tags the version and creates the GitHub release, which publishes the package to npm from CI with a provenance statement (`.github/workflows/publish.yml`).
+
 ## Run it
 
 Requirements: Node 24 (`.nvmrc`), and gitleaks for `make check`.
