@@ -29,6 +29,8 @@ const preview: Preview = {
   decorators: [withTheme],
   argTypesEnhancers: [refineControls],
   parameters: {
+    // A violation fails the story test; disable a rule for one story with a written reason in its own parameters.
+    a11y: { test: "error" },
     controls: {
       expanded: true,
       disableSaveFromUI: true,
@@ -37,7 +39,8 @@ const preview: Preview = {
         /^(ref|key|className|style|sx|classes|slots|slotProps|component|actions?|icon|avatar|on[A-Z].*|\w+Icon)$/,
     },
   },
-  initialGlobals: { theme: "light" },
+  // The test runner sets STORY_THEME to replay every story in dark mode (see vitest.config.ts).
+  initialGlobals: { theme: import.meta.env.STORY_THEME ?? "light" },
   globalTypes: {
     theme: {
       description: "Color scheme",
