@@ -23,6 +23,8 @@ const project = (theme: "light" | "dark") => ({
           // <component>/__screenshots__/<file>/<theme>/<story>.png, with no platform in the name.
           resolveScreenshotPath: ({ root, testFileDirectory, testFileName, arg, ext }) =>
             `${root}/${testFileDirectory}/__screenshots__/${testFileName}/${theme}/${arg}${ext}`,
+          // No transition, ripple or caret in a screenshot: they make it depend on timing.
+          screenshotOptions: { animations: "disabled" as const, caret: "hide" as const },
           comparatorName: "pixelmatch" as const,
           comparatorOptions: { threshold: 0.2, allowedMismatchedPixelRatio: 0.001 },
         },
