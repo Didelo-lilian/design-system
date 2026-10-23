@@ -1,0 +1,28 @@
+name: Update screenshots
+
+# Add the "update-screenshots" label to a pull request to regenerate its baselines on Linux.
+on:
+  pull_request:
+    types: [labeled]
+
+permissions:
+  contents: read
+
+jobs:
+  update:
+    if: github.event.label.name == 'update-screenshots'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install chromium
+      - run: npm run tokens
+      - run: npx vitest run --update
+      - uses: actions/upload-artifact@v7
+        with:
+          name: screenshots
+          path: src/**/__screenshots__

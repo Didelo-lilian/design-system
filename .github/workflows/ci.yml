@@ -20,6 +20,13 @@ jobs:
       - run: npm ci
       - run: npx playwright install chromium
       - run: npm run check
+      # A screenshot that differs from its baseline: the diff images, to look at.
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: screenshot-diffs
+          path: .vitest-attachments
+          if-no-files-found: ignore
 
   image:
     runs-on: ubuntu-latest
