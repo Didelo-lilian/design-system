@@ -1,14 +1,15 @@
 # design-system
 
-[![Release](https://img.shields.io/github/v/release/Didelo-lilian/design-system?include_prereleases)](https://github.com/Didelo-lilian/design-system/releases)
+[![npm](https://img.shields.io/npm/v/@didelo/design-system)](https://www.npmjs.com/package/@didelo/design-system)
+[![Release](https://img.shields.io/github/v/release/Didelo-lilian/design-system)](https://github.com/Didelo-lilian/design-system/releases)
 [![CI](https://github.com/Didelo-lilian/design-system/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Didelo-lilian/design-system/actions/workflows/ci.yml)
 [![License](https://img.shields.io/github/license/Didelo-lilian/design-system)](LICENSE)
 
 A design system on MUI and React: design tokens, accessible components and automated tests, documented in Storybook and reused by my other projects.
 
-> **Status:** bootstrapping. The Storybook is live at https://ds.didelo.fr and follows `main`; the npm package comes with the first release. Follow the [roadmap](https://github.com/orgs/Didelo-lilian/projects/1).
+> **Status:** 1.0. The Storybook is live at https://ds.didelo.fr and follows `main`; the package is on npm as [`@didelo/design-system`](https://www.npmjs.com/package/@didelo/design-system). Follow the [roadmap](https://github.com/orgs/Didelo-lilian/projects/1).
 
-## What it will be
+## What it is
 
 | Layer | Choice |
 |---|---|
@@ -16,7 +17,7 @@ A design system on MUI and React: design tokens, accessible components and autom
 | Tokens | One JSON source in the DTCG format, built into CSS variables and the MUI theme, light and dark |
 | Documentation | Storybook, built into an nginx image on every merge to `main` and served behind Traefik on the [VPS](https://github.com/Didelo-lilian/infra) |
 | Tests | Stories run as tests in a real browser, axe accessibility checks, screenshot regression |
-| Release | release-please for versions and changelog, then npm |
+| Release | release-please for versions and changelog, published to npm from CI with a provenance statement |
 
 ## Install
 
