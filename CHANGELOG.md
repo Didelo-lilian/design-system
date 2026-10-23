@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0](https://github.com/Didelo-lilian/design-system/compare/v0.2.1...v1.0.0) (2026-10-23)
+
+
+### Documentation
+
+* describe the design system as released ([#56](https://github.com/Didelo-lilian/design-system/issues/56)) ([c60a8b0](https://github.com/Didelo-lilian/design-system/commit/c60a8b0e3aa502852bf95b38febf4dfa32fdee04))
+
 ## [0.2.1](https://github.com/Didelo-lilian/design-system/compare/v0.2.0...v0.2.1) (2026-10-23)
 
 
