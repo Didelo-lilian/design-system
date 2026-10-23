@@ -20,10 +20,11 @@ A design system on MUI and React: design tokens, accessible components and autom
 
 ## Run it
 
-Nothing to run yet. `make check` runs the same checks as CI:
+Requirements: Node 24 (`.nvmrc`), and gitleaks for `make check`.
 
 ```bash
-make check   # gitleaks on the history
+npm ci && npm run storybook   # Storybook on http://localhost:6006
+make check                    # same checks as CI: lint, type check, Storybook build, gitleaks
 ```
 
 ## Changelog
