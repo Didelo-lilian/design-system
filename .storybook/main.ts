@@ -22,7 +22,7 @@ const muiProp =
 const config: StorybookConfig = {
   framework: "@storybook/react-vite",
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(ts|tsx)"],
-  addons: ["@storybook/addon-docs"],
+  addons: ["@storybook/addon-docs", "@storybook/addon-vitest"],
   core: { disableTelemetry: true },
   typescript: {
     reactDocgen: "react-docgen-typescript",

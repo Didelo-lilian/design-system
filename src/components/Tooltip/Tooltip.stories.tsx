@@ -73,7 +73,18 @@ export const DescribeChild: Story = {
   },
 };
 
-export const WithoutArrow: Story = { args: { arrow: false } };
+export const WithoutArrow: Story = {
+  args: { arrow: false },
+  play: async ({ canvas, userEvent }) => {
+    await userEvent.tab();
+    await expect(
+      canvas.getByRole("button", { name: "Save the document" }),
+    ).toHaveFocus();
+    const tooltip = await body().findByRole("tooltip");
+    await expect(tooltip).toHaveTextContent("Save the document");
+    await expect(tooltip.querySelector(".MuiTooltip-arrow")).toBeNull();
+  },
+};
 
 export const Placements: Story = {
   args: { open: true },

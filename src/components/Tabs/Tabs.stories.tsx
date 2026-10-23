@@ -60,7 +60,21 @@ export const Default: Story = {
   },
 };
 
-export const DefaultValue: Story = { args: { defaultValue: "history" } };
+export const DefaultValue: Story = {
+  args: { defaultValue: "history" },
+  play: async ({ canvas, args }) => {
+    const history = canvas.getByRole("tab", { name: "History" });
+    await expect(history).toHaveAttribute("aria-selected", "true");
+    await expect(canvas.getByRole("tab", { name: "Overview" })).toHaveAttribute(
+      "aria-selected",
+      "false",
+    );
+    await expect(canvas.getByRole("tabpanel")).toHaveTextContent(
+      "History content",
+    );
+    await expect(args.onChange).not.toHaveBeenCalled();
+  },
+};
 
 export const FullWidth: Story = { args: { variant: "fullWidth" } };
 

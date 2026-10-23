@@ -14,9 +14,25 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
-export const Checked: Story = { args: { defaultChecked: true } };
+export const Checked: Story = {
+  args: { defaultChecked: true },
+  play: async ({ canvas, userEvent, args }) => {
+    const checkbox = canvas.getByRole("checkbox", { name: "Accept the terms" });
+    await expect(checkbox).toBeChecked();
+    await userEvent.click(checkbox);
+    await expect(checkbox).not.toBeChecked();
+    await expect(args.onChange).toHaveBeenCalledTimes(1);
+  },
+};
 
-export const Indeterminate: Story = { args: { indeterminate: true } };
+export const Indeterminate: Story = {
+  args: { indeterminate: true },
+  play: async ({ canvas }) => {
+    await expect(
+      canvas.getByRole("checkbox", { name: "Accept the terms" }),
+    ).toBePartiallyChecked();
+  },
+};
 
 export const Disabled: Story = { args: { disabled: true } };
 
@@ -24,7 +40,14 @@ export const DisabledChecked: Story = {
   args: { disabled: true, defaultChecked: true },
 };
 
-export const WithError: Story = { args: { error: true, required: true } };
+export const WithError: Story = {
+  args: { error: true, required: true },
+  play: async ({ canvas }) => {
+    await expect(
+      canvas.getByRole("checkbox", { name: /Accept the terms/ }),
+    ).toBeRequired();
+  },
+};
 
 export const Toggle: Story = {
   play: async ({ canvas, userEvent, args }) => {

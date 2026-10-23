@@ -35,8 +35,13 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: { variant: "contained" },
   play: async ({ args, canvas }) => {
-    await userEvent.click(canvas.getByRole("button", { name: "Button" }));
+    const button = canvas.getByRole("button", { name: "Button" });
+    await userEvent.click(button);
     await expect(args.onClick).toHaveBeenCalledOnce();
+
+    await userEvent.keyboard("{Enter}");
+    await userEvent.keyboard(" ");
+    await expect(args.onClick).toHaveBeenCalledTimes(3);
   },
 };
 
@@ -54,7 +59,12 @@ export const ErrorColor: Story = {
 
 export const Disabled: Story = {
   args: { variant: "contained", disabled: true },
-  play: async ({ canvas }) => {
-    await expect(canvas.getByRole("button", { name: "Button" })).toBeDisabled();
+  play: async ({ args, canvas }) => {
+    const button = canvas.getByRole("button", { name: "Button" });
+    await expect(button).toBeDisabled();
+    await userEvent.tab();
+    await expect(button).not.toHaveFocus();
+    await userEvent.keyboard("{Enter}");
+    await expect(args.onClick).not.toHaveBeenCalled();
   },
 };

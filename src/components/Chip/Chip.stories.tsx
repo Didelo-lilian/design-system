@@ -116,8 +116,10 @@ export const Disabled: Story = {
 };
 
 export const StaticLabel: Story = {
-  play: async ({ canvas }) => {
+  play: async ({ canvas, userEvent }) => {
     await expect(canvas.queryByRole("button")).not.toBeInTheDocument();
     await expect(canvas.getByText("Design system")).toBeVisible();
+    await userEvent.tab();
+    await expect(document.body).toHaveFocus();
   },
 };

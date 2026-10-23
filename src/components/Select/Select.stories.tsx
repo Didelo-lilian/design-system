@@ -1,6 +1,6 @@
 import MenuItem from "@mui/material/MenuItem";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, fn, waitFor, within } from "storybook/test";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 import { Select } from "./Select.tsx";
 
 const meta = {
@@ -50,10 +50,26 @@ export const Small: Story = { args: { defaultValue: "apple", size: "small" } };
 
 export const Disabled: Story = {
   args: { defaultValue: "apple", disabled: true },
+  play: async ({ canvas, args }) => {
+    const combobox = canvas.getByRole("combobox", { name: "Fruit" });
+    await expect(combobox).toHaveAttribute("aria-disabled", "true");
+
+    combobox.focus();
+    await userEvent.keyboard("{Enter}");
+
+    await expect(combobox).toHaveAttribute("aria-expanded", "false");
+    await expect(within(document.body).queryByRole("listbox")).toBeNull();
+    await expect(args.onChange).not.toHaveBeenCalled();
+  },
 };
 
 export const WithHelperText: Story = {
   args: { defaultValue: "", helperText: "Pick your favourite fruit." },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole("combobox")).toHaveAccessibleDescription(
+      "Pick your favourite fruit.",
+    );
+  },
 };
 
 export const WithError: Story = {
