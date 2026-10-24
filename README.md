@@ -19,6 +19,53 @@ A design system on MUI and React: design tokens, accessible components and autom
 | Tests | Stories run as tests in a real browser, axe accessibility checks, screenshot regression |
 | Release | release-please for versions and changelog, published to npm from CI with a provenance statement |
 
+## Architecture
+
+What exists today. The diagram is updated in the same pull request as any change it shows.
+
+```mermaid
+flowchart TB
+  visitor([Visitor])
+  app(["A React 19 and MUI 9 app<br/>npm install"])
+  statusrepo["status repository<br/>probe every 15 min"]
+
+  subgraph repo["design-system repository"]
+    tokens["tokens/*.json<br/>DTCG: core, light, dark"]
+    theme["MUI theme<br/>light and dark"]
+    comps["12 components<br/>wrapping MUI"]
+    sb["Storybook<br/>stories, docs, axe panel,<br/>every story also runs as a test"]
+    dist["dist/<br/>ESM and types, tokens.css, fonts.css"]
+    img["Dockerfile<br/>Storybook build, nginx non-root"]
+  end
+
+  subgraph reg["Registries"]
+    ghcr[("GHCR<br/>design-system:main")]
+    npm[("npm<br/>@didelo/design-system")]
+  end
+
+  subgraph vps["VPS · infra repository"]
+    traefik["Traefik<br/>ds.didelo.fr"]
+    ds["ds container<br/>nginx on 8080"]
+  end
+
+  tokens -->|"npm run tokens:<br/>TS objects"| theme
+  theme -->|"ThemeProvider"| comps
+  comps -->|"stories"| sb
+  tokens -->|"CSS variables"| sb
+  comps -->|"npm run build:<br/>components, theme, tokens"| dist
+  tokens -->|"CSS variables"| dist
+  sb -->|"storybook build"| img
+  img -->|"push on every merge to main"| ghcr
+  dist -->|"npm publish on every release"| npm
+  ghcr -->|"pulled when the stack restarts"| ds
+  traefik -->|"edge network"| ds
+  visitor -->|"HTTPS"| traefik
+  statusrepo -->|"HTTPS probe"| traefik
+  npm -->|"npm install"| app
+```
+
+No project of mine installs the package yet: [`status`](https://github.com/Didelo-lilian/status) only probes the Storybook page, and the front end of [`semaphore`](https://github.com/Didelo-lilian/semaphore), not built yet, will be the first to install it.
+
 ## Install
 
 ```bash
@@ -42,6 +89,28 @@ export const App = () => (
 ```
 
 The theme has a light and a dark color scheme, switched with the `data-theme` attribute (`<html data-theme="dark">`) or MUI's `useColorScheme`.
+
+## Delivery
+
+Every merge to `main` rebuilds and redeploys the Storybook; the package is published only when a release pull request is merged.
+
+```mermaid
+flowchart LR
+  dev["Branch<br/>signed commits"] --> pr["Pull request<br/>check, image build, gitleaks,<br/>title conventions"]
+  pr -->|"squash merge"| main["main"]
+
+  main --> deploy["Deploy workflow<br/>docker build and push"]
+  deploy --> ghcr[("GHCR<br/>design-system:main and sha tag")]
+  deploy -->|"workflow_dispatch, stack ds"| appwf["infra: Deploy app<br/>no approval"]
+  appwf -->|"SSH as deploy:<br/>restart the stack"| site["ds.didelo.fr"]
+  ghcr -->|"pulled by the restart"| site
+
+  main --> release["Release workflow<br/>release-please"]
+  release --> relpr["Release pull request<br/>version and CHANGELOG"]
+  relpr -->|"merge"| tag["Tag vX.Y.Z<br/>GitHub release"]
+  tag -->|"release published"| publish["Publish workflow<br/>build, check:package"]
+  publish -->|"trusted publishing,<br/>provenance"| npm[("npm<br/>@didelo/design-system")]
+```
 
 ## Releases
 
