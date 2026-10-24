@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/Didelo-lilian/design-system/compare/v1.0.0...v1.0.1) (2026-10-24)
+
+
+### Documentation
+
+* add architecture and delivery diagrams to the README ([#59](https://github.com/Didelo-lilian/design-system/issues/59)) ([55b2525](https://github.com/Didelo-lilian/design-system/commit/55b25256c3ace77d19a4d01c3968f528fcbc9875)), closes [#58](https://github.com/Didelo-lilian/design-system/issues/58)
+
 ## [1.0.0](https://github.com/Didelo-lilian/design-system/compare/v0.2.1...v1.0.0) (2026-10-23)
 
 
