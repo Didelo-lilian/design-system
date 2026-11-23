@@ -8,6 +8,7 @@ reviews:
   auto_approvals:
     enabled: true
     max_merge_risk: low
+    min_blocking_severity: major
   path_instructions:
     - path: "src/**"
       instructions: "Every component needs a story with accessibility checks and component or interaction tests. Flag colors, spacing or typography that bypass the design tokens. A change to the exports or public API of @didelo/design-system breaks semaphore: the PR title must carry a breaking-change marker."
