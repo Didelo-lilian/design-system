@@ -1,7 +1,25 @@
 reviews:
   poem: false
+  high_level_summary_in_walkthrough: true
   auto_review:
-    ignore_usernames:
-      - dependabot[bot]
+    auto_pause_after_reviewed_commits: 0
     ignore_title_keywords:
       - "chore(main): release"
+  auto_approvals:
+    enabled: true
+    max_merge_risk: low
+  path_instructions:
+    - path: "src/**"
+      instructions: "Every component needs a story with accessibility checks and component or interaction tests. Flag colors, spacing or typography that bypass the design tokens."
+    - path: "tokens/**"
+      instructions: "Tokens are the single source of colors, spacing and typography. Flag a renamed or removed token: semaphore consumes the published package."
+    - path: "package.json"
+      instructions: "A change to exports, peer dependencies or the public API of @didelo/design-system breaks semaphore: the PR title must carry a breaking-change marker."
+    - path: "README.md"
+      instructions: "When the PR changes the architecture, the build or the publishing flow, the Mermaid diagrams must be updated in this same PR."
+knowledge_base:
+  linked_repositories:
+    - repository: Didelo-lilian/semaphore
+      instructions: "Its front depends on @didelo/design-system. Flag API, token or export changes that would break it."
+    - repository: Didelo-lilian/.github
+      instructions: "Shared workflows (pr.yml, release.yml) called by this repo. Flag changes to the inputs or names this repo relies on."
