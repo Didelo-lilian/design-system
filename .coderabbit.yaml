@@ -14,9 +14,7 @@ reviews:
     - path: "tokens/**"
       instructions: "Tokens are the single source of colors, spacing and typography. Flag a renamed or removed token: semaphore consumes the published package."
     - path: "package.json"
-      instructions: "A change to exports, peer dependencies or the public API of @didelo/design-system breaks semaphore: the PR title must carry a breaking-change marker."
-    - path: "README.md"
-      instructions: "When the PR changes the architecture, the build or the publishing flow, the Mermaid diagrams must be updated in this same PR."
+      instructions: "A change to exports, peer dependencies or the public API of @didelo/design-system breaks semaphore: the PR title must carry a breaking-change marker. If the PR changes the build or the publishing flow, the Mermaid diagrams in the README must be updated in the same PR."
 knowledge_base:
   linked_repositories:
     - repository: Didelo-lilian/semaphore
