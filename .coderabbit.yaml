@@ -10,7 +10,7 @@ reviews:
     max_merge_risk: low
   path_instructions:
     - path: "src/**"
-      instructions: "Every component needs a story with accessibility checks and component or interaction tests. Flag colors, spacing or typography that bypass the design tokens."
+      instructions: "Every component needs a story with accessibility checks and component or interaction tests. Flag colors, spacing or typography that bypass the design tokens. A change to the exports or public API of @didelo/design-system breaks semaphore: the PR title must carry a breaking-change marker."
     - path: "tokens/**"
       instructions: "Tokens are the single source of colors, spacing and typography. Flag a renamed or removed token: semaphore consumes the published package."
     - path: "package.json"
